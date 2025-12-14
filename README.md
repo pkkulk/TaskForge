@@ -127,6 +127,68 @@ task-manager-app/
 
 ---
 
+
+## 🛠 Local Setup Instructions
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone <your-repo-url>
+cd task-manager-app
+```
+
+---
+
+### 2️⃣ Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Create `.env` file:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+JWT_SECRET=your_secret_key
+```
+
+Run migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+Start server:
+
+```bash
+npm run dev
+```
+
+Backend runs on:
+
+```
+http://localhost:5000
+```
+
+---
+
+### 3️⃣ Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
 ## 🧠 High-Level Architecture
 
 ```
@@ -462,67 +524,6 @@ Authorization: Bearer <token>
 | POST   | /api/tasks     | Create task    |
 | PUT    | /api/tasks/:id | Update task    |
 | DELETE | /api/tasks/:id | Delete task    |
-
----
-
-## 🛠 Local Setup Instructions
-
-### 1️⃣ Clone Repository
-
-```bash
-git clone <your-repo-url>
-cd task-manager-app
-```
-
----
-
-### 2️⃣ Backend Setup
-
-```bash
-cd backend
-npm install
-```
-
-Create `.env` file:
-
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname
-JWT_SECRET=your_secret_key
-```
-
-Run migrations:
-
-```bash
-npx prisma migrate dev
-```
-
-Start server:
-
-```bash
-npm run dev
-```
-
-Backend runs on:
-
-```
-http://localhost:5000
-```
-
----
-
-### 3️⃣ Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend runs on:
-
-```
-http://localhost:5173
-```
 
 ---
 
