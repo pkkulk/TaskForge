@@ -1,11 +1,21 @@
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/e9b99055-223a-4fb9-a7ca-bab573eb2a42" />
-<img width="1366" height="768" alt="image" src ="https://github.com/user-attachments/assets/927c0d75-4fbc-4ee6-b7e8-2bf306f6adaa" />  <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/fa0f3d48-3a77-4956-9fab-38118a21f8e2" />
+# 📝 Task Management Application (Full Stack)
 
-## 📝 Task Management Application (Full Stack)
+A full-stack **Task Management Application** with **JWT-based authentication**, allowing users to securely **register, log in, and manage their own tasks**.
 
-A full-stack **Task Management Application** with **JWT authentication**, allowing users to register, log in, and manage their own tasks securely.
+The application follows a clean **frontend–backend separation**, uses **middleware-based authorization**, and ensures **user-level data isolation**.
 
-Built using **Node.js, Express, TypeScript, Prisma, PostgreSQL**, and a **React frontend**.
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <img width="45%" src="https://github.com/user-attachments/assets/e9b99055-223a-4fb9-a7ca-bab573eb2a42" />
+  <img width="45%" src="https://github.com/user-attachments/assets/927c0d75-4fbc-4ee6-b7e8-2bf306f6adaa" />
+</p>
+
+<p align="center">
+  <img width="60%" src="https://github.com/user-attachments/assets/fa0f3d48-3a77-4956-9fab-38118a21f8e2" />
+</p>
 
 ---
 
@@ -13,22 +23,22 @@ Built using **Node.js, Express, TypeScript, Prisma, PostgreSQL**, and a **React 
 
 ### 🔐 Authentication
 
-* User registration with hashed passwords
-* User login with JWT token generation
-* Secure authentication using JSON Web Tokens
-* Protected routes using middleware
+* User registration with **hashed passwords**
+* User login with **JWT token generation**
+* Secure authentication using **JSON Web Tokens**
+* Protected routes using **authentication middleware**
 
 ### ✅ Task Management
 
 * Create tasks
 * View user-specific tasks
-* Update tasks
+* Update task status
 * Delete tasks
-* Each task belongs to a single authenticated user
+* Each task belongs to a **single authenticated user**
 
 ### 🛡 Security
 
-* Password hashing with bcrypt
+* Password hashing with **bcrypt**
 * JWT-based authorization
 * Users can access **only their own tasks**
 
@@ -44,69 +54,90 @@ Built using **Node.js, Express, TypeScript, Prisma, PostgreSQL**, and a **React 
 * Prisma ORM
 * PostgreSQL
 * JWT Authentication
-* Zod (Validation)
+* Zod (Request Validation)
 
 ### Frontend
 
-* React
-* Vite
-* Redux Toolkit
-* Axios
+* React 18 (Vite)
 * Tailwind CSS
+* Axios
+* React Router
+* JWT-based route protection
 
 ---
 
 ## 📁 Project Structure
 
 ```
-backend/
+task-manager-app/
 │
-├── prisma/
-│   ├── schema.prisma
-│   └── migrations/
+├── backend/
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   └── migrations/
+│   │
+│   ├── src/
+│   │   ├── controllers/
+│   │   │   ├── auth.controller.ts
+│   │   │   └── task.controller.ts
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── auth.routes.ts
+│   │   │   └── task.routes.ts
+│   │   │
+│   │   ├── middlewares/
+│   │   │   └── auth.middleware.ts
+│   │   │
+│   │   ├── validators/
+│   │   │   ├── auth.schema.ts
+│   │   │   └── task.schema.ts
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── hash.ts
+│   │   │   ├── jwt.ts
+│   │   │   └── prisma.ts
+│   │   │
+│   │   ├── app.ts
+│   │   └── server.ts
+│   │
+│   └── .env
 │
-├── src/
-│   ├── controllers/
-│   │   ├── auth.controller.ts
-│   │   └── task.controller.ts
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   │   ├── axios.ts
+│   │   │   ├── auth.ts
+│   │   │   └── tasks.ts
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Login.tsx
+│   │   │   ├── Register.tsx
+│   │   │   └── Dashboard.tsx
+│   │   │
+│   │   ├── routes/
+│   │   │   └── ProtectedRoute.tsx
+│   │   │
+│   │   ├── App.tsx
+│   │   └── main.tsx
 │   │
-│   ├── routes/
-│   │   ├── auth.routes.ts
-│   │   └── task.routes.ts
-│   │
-│   ├── middlewares/
-│   │   └── auth.middleware.ts
-│   │
-│   ├── validators/
-│   │   ├── auth.schema.ts
-│   │   └── task.schema.ts
-│   │
-│   ├── utils/
-│   │   ├── hash.ts
-│   │   ├── jwt.ts
-│   │   └── prisma.ts
-│   │
-│   ├── app.ts
-│   └── server.ts
+│   └── index.css
 │
-├── .env
-├── package.json
-└── tsconfig.json
+└── README.md
 ```
 
 ---
 
-## 🧠 Architecture Diagram
+## 🧠 High-Level Architecture
 
 ```
-Client (Postman / Frontend)
+Frontend (React)
         |
-        | HTTP Request
+        | HTTP Requests (Axios + JWT)
         ↓
-Routes (auth.routes.ts / task.routes.ts)
+Backend Routes (Express)
         |
         ↓
-Middleware (JWT Verification)
+Authentication Middleware
         |
         ↓
 Controllers (Business Logic)
@@ -120,66 +151,89 @@ PostgreSQL Database
 
 ---
 
-## 🔄 Application Flow
+## 🔁 End-to-End Sequence Flow
 
 ### 1️⃣ User Registration
 
 ```
-POST /api/auth/register
+User
+ → Frontend (Register Page)
+ → POST /api/auth/register
+ → Validation (Zod)
+ → Password Hashing (bcrypt)
+ → Prisma ORM
+ → PostgreSQL
+ → User Created
+ → Redirect to Login
 ```
-
-* Validates input using Zod
-* Hashes password using bcrypt
-* Stores user in database
 
 ---
 
-### 2️⃣ User Login
+### 2️⃣ User Login (JWT Generation)
 
 ```
-POST /api/auth/login
+User
+ → Frontend (Login Page)
+ → POST /api/auth/login
+ → Credential Verification
+ → JWT Generated
+ → Token returned
+ → Stored in localStorage
+ → Redirect to Dashboard
 ```
-
-* Verifies credentials
-* Generates JWT token
-* Returns token to client
 
 ---
 
-### 3️⃣ Authenticated Task Operations
-
-All task routes require:
+### 3️⃣ Fetch Tasks (Protected)
 
 ```
-Authorization: Bearer <JWT_TOKEN>
+Frontend
+ → GET /api/tasks
+ → Authorization: Bearer <JWT>
+ → Auth Middleware
+ → userId extracted
+ → Task Controller
+ → Prisma ORM
+ → PostgreSQL
+ → Tasks returned
+ → Rendered on Dashboard
 ```
+
+---
+
+### 4️⃣ Create / Update / Delete Task
+
+```
+User Action
+ → Frontend
+ → Protected API Call
+ → Auth Middleware
+ → Task Controller
+ → Prisma ORM
+ → PostgreSQL
+ → Success Response
+ → UI Refresh
+```
+
+---
+
+## 🔌 API Endpoints
+
+### Authentication
+
+| Method | Endpoint           | Description   |
+| ------ | ------------------ | ------------- |
+| POST   | /api/auth/register | Register user |
+| POST   | /api/auth/login    | Login user    |
+
+### Tasks (Protected)
 
 | Method | Endpoint       | Description    |
 | ------ | -------------- | -------------- |
-| POST   | /api/tasks     | Create task    |
 | GET    | /api/tasks     | Get user tasks |
+| POST   | /api/tasks     | Create task    |
 | PUT    | /api/tasks/:id | Update task    |
 | DELETE | /api/tasks/:id | Delete task    |
-
----
-
-## 🔐 Authentication Middleware Logic
-
-* Extracts token from request header
-* Verifies JWT token
-* Attaches `userId` to request
-* Blocks unauthorized access
-
----
-
-## 🧪 API Testing
-
-All APIs were tested using **Postman**:
-
-* Authentication APIs
-* Protected task APIs
-* Token validation
-* User-specific data isolation
 
 ---
 
@@ -220,6 +274,12 @@ Start server:
 npm run dev
 ```
 
+Backend runs on:
+
+```
+http://localhost:5000
+```
+
 ---
 
 ### 3️⃣ Frontend Setup
@@ -230,19 +290,27 @@ npm install
 npm run dev
 ```
 
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
 ---
 
 ## 🧠 Key Learnings
 
-* JWT authentication and authorization
+* JWT authentication & authorization
 * Middleware-based route protection
 * Prisma ORM with relational data
-* Clean backend architecture
 * Secure password handling
-* Full CRUD lifecycle
+* Clean frontend–backend integration
+* End-to-end full-stack workflow
 
 ---
 
 ## 👨‍💻 Author
 
 **Prathmesh Kulkarni**
+
+---
