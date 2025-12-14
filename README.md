@@ -308,6 +308,220 @@ http://localhost:5173
 * End-to-end full-stack workflow
 
 ---
+🗂 How Files Interact (Frontend ↔ Backend Mapping)
+
+This section explains which exact files are involved for each user action, from UI to database.
+
+1️⃣ User Registration
+🖥 Frontend
+
+UI Page:
+frontend/src/pages/Register.tsx
+
+API Call:
+frontend/src/api/auth.ts
+
+registerUser({ username, password })
+
+🔧 Backend
+
+Route:
+backend/src/routes/auth.routes.ts
+
+Controller:
+backend/src/controllers/auth.controller.ts
+
+Validates request using Zod
+
+Hashes password
+
+Utility:
+backend/src/utils/hash.ts
+
+Database Access:
+backend/src/utils/prisma.ts
+
+🗄 Database
+
+Table: User
+
+2️⃣ User Login
+🖥 Frontend
+
+UI Page:
+frontend/src/pages/Login.tsx
+
+API Call:
+frontend/src/api/auth.ts
+
+loginUser({ username, password })
+
+
+Token Storage:
+localStorage
+
+🔧 Backend
+
+Route:
+backend/src/routes/auth.routes.ts
+
+Controller:
+backend/src/controllers/auth.controller.ts
+
+Compares password
+
+Generates JWT
+
+Utility:
+backend/src/utils/jwt.ts
+
+🗄 Database
+
+Table: User
+
+3️⃣ Open Dashboard (View Tasks)
+🖥 Frontend
+
+UI Page:
+frontend/src/pages/Dashboard.tsx
+
+Protected Route:
+frontend/src/routes/ProtectedRoute.tsx
+
+API Call:
+frontend/src/api/tasks.ts
+
+getTasks()
+
+🔧 Backend
+
+Route:
+backend/src/routes/task.routes.ts
+
+Middleware:
+backend/src/middlewares/auth.middleware.ts
+
+Verifies JWT
+
+Extracts userId
+
+Controller:
+backend/src/controllers/task.controller.ts
+
+🗄 Database
+
+Table: Task (filtered by userId)
+
+4️⃣ Create Task
+🖥 Frontend
+
+UI Page:
+frontend/src/pages/Dashboard.tsx
+
+API Call:
+frontend/src/api/tasks.ts
+
+createTask({ title, description, status })
+
+🔧 Backend
+
+Route:
+backend/src/routes/task.routes.ts
+
+Middleware:
+auth.middleware.ts
+
+Controller:
+task.controller.ts
+
+Attaches task to logged-in user
+
+🗄 Database
+
+Table: Task
+
+5️⃣ Update Task Status
+🖥 Frontend
+
+UI Page:
+Dashboard.tsx
+
+API Call:
+
+updateTask(taskId, { status })
+
+🔧 Backend
+
+Route:
+PUT /api/tasks/:id
+
+Middleware:
+auth.middleware.ts
+
+Controller:
+task.controller.ts
+
+Verifies task ownership
+
+🗄 Database
+
+Table: Task
+
+6️⃣ Delete Task
+🖥 Frontend
+
+UI Page:
+Dashboard.tsx
+
+API Call:
+
+deleteTask(taskId)
+
+🔧 Backend
+
+Route:
+DELETE /api/tasks/:id
+
+Middleware:
+auth.middleware.ts
+
+Controller:
+task.controller.ts
+
+🗄 Database
+
+Table: Task
+
+7️⃣ Logout
+🖥 Frontend
+
+UI Page:
+Dashboard.tsx
+
+Logic:
+
+localStorage.removeItem("token")
+
+
+Redirect:
+/login
+
+🔧 Backend
+
+❌ No backend call (JWT is stateless)
+
+🔑 Axios Token Handling (Important)
+Frontend File
+
+frontend/src/api/axios.ts
+
+This file:
+
+Sets backend base URL
+
+Automatically attaches JWT token to every request
+
+Authorization: Bearer <token>
 
 ## 👨‍💻 Author
 
