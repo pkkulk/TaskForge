@@ -9,12 +9,12 @@ The application follows a clean **frontend–backend separation**, uses **middle
 ## 📸 Screenshots
 
 <p align="center">
-  <img width="45%" src="https://github.com/user-attachments/assets/e9b99055-223a-4fb9-a7ca-bab573eb2a42" />
-  <img width="45%" src="https://github.com/user-attachments/assets/927c0d75-4fbc-4ee6-b7e8-2bf306f6adaa" />
+  <img width="80%" src="https://github.com/user-attachments/assets/e9b99055-223a-4fb9-a7ca-bab573eb2a42" />
 </p>
 
 <p align="center">
-  <img width="60%" src="https://github.com/user-attachments/assets/fa0f3d48-3a77-4956-9fab-38118a21f8e2" />
+  <img width="45%" src="https://github.com/user-attachments/assets/fa0f3d48-3a77-4956-9fab-38118a21f8e2" />
+   <img width="45%" src="https://github.com/user-attachments/assets/927c0d75-4fbc-4ee6-b7e8-2bf306f6adaa" />
 </p>
 
 ---
