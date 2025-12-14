@@ -1,3 +1,6 @@
+<img width="1366" height="768" alt="image" src ="https://github.com/user-attachments/assets/927c0d75-4fbc-4ee6-b7e8-2bf306f6adaa" />  <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/fa0f3d48-3a77-4956-9fab-38118a21f8e2" /><img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/1ab59e17-a1fb-4d80-a5f7-c4cbf9c8538a" />
+
+
 ## 📝 Task Management Application (Full Stack)
 
 A full-stack **Task Management Application** with **JWT authentication**, allowing users to register, log in, and manage their own tasks securely.
