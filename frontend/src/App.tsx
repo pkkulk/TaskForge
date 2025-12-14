@@ -1,17 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
-function App() {
+export default function App() {
+  const token = localStorage.getItem("token");
 
   return (
-    <>
-      <div>
-        <h1 className='text-7xl text-red-500 bg-amber-400'> prathmesh </h1>
-     </div>
-    </>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            token ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+          }
+        />
 
-export default App
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Protected route */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
